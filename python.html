@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CodeBeg - Python Codes</title>
+
+<style>
+
+body{
+background:#000;
+color:#00ff41;
+font-family:monospace;
+margin:0;
+}
+
+header{
+text-align:center;
+padding:25px;
+border-bottom:1px solid #00ff41;
+}
+
+.container{
+max-width:1200px;
+margin:auto;
+padding:20px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:20px;
+}
+
+.code-card{
+background:#050505;
+border:1px solid #00ff41;
+border-radius:10px;
+padding:20px;
+}
+
+.code-card h2{
+margin-top:0;
+}
+
+.code-card p{
+color:#8aff9c;
+}
+
+.view-btn{
+display:inline-block;
+padding:10px 15px;
+background:#00ff41;
+color:#000;
+text-decoration:none;
+border-radius:5px;
+font-weight:bold;
+}
+
+.empty{
+text-align:center;
+padding:50px;
+font-size:20px;
+}
+
+</style>
+</head>
+<body>
+
+<header>
+<h1>Python Codes</h1>
+<p>Browse all Python snippets uploaded on CodeBeg</p>
+</header>
+
+<div class="container" id="pythonCodes"></div>
+
+<script>
+
+const container =
+document.getElementById("pythonCodes");
+
+const codes =
+JSON.parse(
+localStorage.getItem("codes")
+) || [];
+
+const pythonCodes =
+codes.filter(item =>
+(item.language || "")
+.toLowerCase()
+=== "python"
+);
+
+if(pythonCodes.length === 0){
+
+container.innerHTML = `
+<div class="empty">
+No Python Codes Found
+</div>
+`;
+
+}else{
+
+pythonCodes.forEach(item => {
+
+container.innerHTML += `
+
+<div class="code-card">
+
+<h2>
+${item.title || "Untitled"}
+</h2>
+
+<p>
+${item.description || ""}
+</p>
+
+<a
+href="code.html?id=${codes.indexOf(item)}"
+class="view-btn">
+
+View Code
+
+</a>
+
+</div>
+
+`;
+
+});
+
+}
+
+</script>
+
+</body>
+</html>

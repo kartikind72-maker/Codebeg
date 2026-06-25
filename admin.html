@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CodeBeg Admin Panel</title>
+
+<style>
+
+body{
+    background:#000;
+    color:#00ff41;
+    font-family:monospace;
+    margin:0;
+    padding:20px;
+}
+
+.admin-title{
+    text-align:center;
+    font-size:2.5rem;
+    text-shadow:0 0 15px #00ff41;
+}
+
+.admin-subtitle{
+    text-align:center;
+    color:#8aff9c;
+    margin-bottom:30px;
+}
+
+#codeForm{
+    max-width:900px;
+    margin:auto;
+    padding:25px;
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+    border:1px solid #00ff41;
+    border-radius:15px;
+    background:#050505;
+    box-shadow:0 0 25px rgba(0,255,65,.2);
+}
+
+input,
+select,
+textarea{
+    background:#000;
+    color:#00ff41;
+    border:1px solid #00ff41;
+    border-radius:8px;
+    padding:12px;
+    font-size:15px;
+}
+
+textarea{
+    min-height:150px;
+    resize:vertical;
+}
+
+button{
+    background:#00ff41;
+    color:#000;
+    border:none;
+    padding:12px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+button:hover{
+    box-shadow:0 0 15px #00ff41;
+}
+
+.manage-heading{
+    text-align:center;
+    margin-top:40px;
+}
+
+#manageCodes{
+    max-width:900px;
+    margin:20px auto;
+}
+
+.manage-card{
+    border:1px solid #00ff41;
+    background:#050505;
+    padding:15px;
+    border-radius:10px;
+    margin-bottom:15px;
+}
+
+.manage-actions{
+    display:flex;
+    gap:10px;
+    margin-top:10px;
+}
+
+.edit-btn{
+    flex:1;
+    background:#00ff41;
+    color:#000;
+}
+
+.delete-btn{
+    flex:1;
+    background:red;
+    color:#fff;
+}
+
+</style>
+</head>
+<body>
+
+<h1 class="admin-title">CODEBEG ADMIN PANEL</h1>
+
+<p class="admin-subtitle">
+Upload and Manage Your Code Snippets
+</p>
+
+<form id="codeForm">
+
+<input
+type="password"
+id="adminPass"
+placeholder="Admin Password"
+required>
+
+<input
+type="text"
+id="title"
+placeholder="Code Title"
+required>
+
+<select id="language">
+<option>HTML</option>
+<option>CSS</option>
+<option>C</option>
+<option>Python</option>
+</select>
+
+<textarea
+id="description"
+placeholder="Description">
+</textarea>
+
+<textarea
+id="code"
+placeholder="Paste Code Here"
+required>
+</textarea>
+
+<button type="submit">
+Upload Code
+</button>
+
+</form>
+
+<h2 class="manage-heading">
+Manage Codes
+</h2>
+
+<div id="manageCodes"></div>
+
+<script>
+
+const ADMIN_PASSWORD = "codebeg123";
+
+/* =========================
+   LOAD CODES
+========================= */
+
+function loadCodes(){
+
+    const container =
+    document.getElementById("manageCodes");
+
+    let codes =
+    JSON.parse(
+    localStorage.getItem("codes")
+    ) || [];
+
+    container.innerHTML = "";
+
+    if(codes.length === 0){
+
+        container.innerHTML =
+        "<p>No Codes Uploaded Yet</p>";
+
+        return;
+
+    }
+
+    codes.forEach((item,index)=>{
+
+        const card =
+        document.createElement("div");
+
+        card.className =
+        "manage-card";
+
+        card.innerHTML = `
+
+        <h3>
+        ${item.title || "Untitled Code"}
+        </h3>
+
+        <p>
+        ${item.language}
+        </p>
+
+        <div class="manage-actions">
+
+        <button
+        class="edit-btn"
+        onclick="editCode(${index})">
+
+        Edit
+
+        </button>
+
+        <button
+        class="delete-btn"
+        onclick="deleteCode(${index})">
+
+        Delete
+
+        </button>
+
+        </div>
+
+        `;
+
+        container.appendChild(card);
+
+    });
+
+}
+
+/* =========================
+   DELETE
+========================= */
+
+function deleteCode(index){
+
+    const pass =
+    prompt(
+    "Enter Admin Password"
+    );
+
+    if(pass !== ADMIN_PASSWORD){
+
+        alert(
+        "Wrong Password"
+        );
+
+        return;
+
+    }
+
+    let codes =
+    JSON.parse(
+    localStorage.getItem("codes")
+    ) || [];
+
+    codes.splice(index,1);
+
+    localStorage.setItem(
+    "codes",
+    JSON.stringify(codes)
+    );
+
+    alert(
+    "Code Deleted"
+    );
+
+    loadCodes();
+
+}
+
+/* =========================
+   EDIT
+========================= */
+
+function editCode(index){
+
+    const pass =
+    prompt(
+    "Enter Admin Password"
+    );
+
+    if(pass !== ADMIN_PASSWORD){
+
+        alert(
+        "Wrong Password"
+        );
+
+        return;
+
+    }
+
+    let codes =
+    JSON.parse(
+    localStorage.getItem("codes")
+    ) || [];
+
+    const item =
+    codes[index];
+
+    document.getElementById(
+    "title"
+    ).value =
+    item.title || "";
+
+    document.getElementById(
+    "language"
+    ).value =
+    item.language || "";
+
+    document.getElementById(
+    "description"
+    ).value =
+    item.description || "";
+
+    document.getElementById(
+    "code"
+    ).value =
+    item.code || "";
+
+    codes.splice(index,1);
+
+    localStorage.setItem(
+    "codes",
+    JSON.stringify(codes)
+    );
+
+    loadCodes();
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+/* =========================
+   UPLOAD
+========================= */
+
+document
+.getElementById("codeForm")
+.addEventListener(
+"submit",
+function(e){
+
+    e.preventDefault();
+
+    const password =
+    document.getElementById(
+    "adminPass"
+    ).value;
+
+    if(
+    password !==
+    ADMIN_PASSWORD
+    ){
+
+        alert(
+        "Wrong Password"
+        );
+
+        return;
+
+    }
+
+    const newCode = {
+
+        title:
+        document.getElementById(
+        "title"
+        ).value.trim(),
+
+        language:
+        document.getElementById(
+        "language"
+        ).value,
+
+        description:
+        document.getElementById(
+        "description"
+        ).value,
+
+        code:
+        document.getElementById(
+        "code"
+        ).value
+
+    };
+
+    let codes =
+    JSON.parse(
+    localStorage.getItem("codes")
+    ) || [];
+
+    codes.push(
+    newCode
+    );
+
+    localStorage.setItem(
+    "codes",
+    JSON.stringify(codes)
+    );
+
+    alert(
+    "Code Uploaded Successfully!"
+    );
+
+    this.reset();
+
+    loadCodes();
+
+}
+);
+
+/* =========================
+   START
+========================= */
+
+loadCodes();
+
+</script>
+
+</body>
+</html>

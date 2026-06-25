@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeBeg | Code Vault</title>
+ <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+    /* =========================
+   CODEBEG HACKER THEME
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#000;
+    color:#00ff41;
+    font-family:'Fira Code', monospace;
+    line-height:1.6;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.header{
+    text-align:center;
+    padding:50px 20px;
+    border-bottom:1px solid #00ff41;
+}
+
+.logo{
+    font-family:'Orbitron', sans-serif;
+    font-size:3rem;
+    letter-spacing:4px;
+    text-shadow:0 0 10px #00ff41;
+}
+
+.tagline{
+    margin-top:10px;
+    color:#8aff9c;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar{
+    position:sticky;
+    top:0;
+    z-index:1000;
+
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:20px;
+
+    padding:15px;
+    background:#050505;
+    border-bottom:1px solid #00ff41;
+}
+
+.navbar a{
+    text-decoration:none;
+    color:#00ff41;
+    font-weight:bold;
+    transition:.3s;
+}
+
+.navbar a:hover{
+    color:#fff;
+    text-shadow:0 0 10px #00ff41;
+}
+
+/* =========================
+   SECTIONS
+========================= */
+
+section{
+    padding:60px 20px;
+}
+
+section h2{
+    text-align:center;
+    margin-bottom:25px;
+    font-family:'Orbitron', sans-serif;
+    text-shadow:0 0 8px #00ff41;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+    text-align:center;
+    max-width:900px;
+    margin:auto;
+}
+
+.hero p{
+    max-width:700px;
+    margin:auto;
+}
+
+/* =========================
+   ABOUT
+========================= */
+
+.about{
+    max-width:900px;
+    margin:auto;
+}
+
+.about p{
+    text-align:center;
+}
+
+/* =========================
+   SLIDER
+========================= */
+
+.slider{
+    max-width:800px;
+    margin:auto;
+    position:relative;
+}
+
+.slide{
+    display:none;
+    text-align:center;
+    padding:40px 20px;
+    border:1px solid #00ff41;
+    border-radius:10px;
+    box-shadow:0 0 15px rgba(0,255,65,.3);
+}
+
+.slide.active{
+    display:block;
+}
+
+.slide h3{
+    margin-bottom:10px;
+}
+
+/* =========================
+   CATEGORY CARDS
+========================= */
+
+.card-container{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+    max-width:1100px;
+    margin:auto;
+}
+
+.card{
+    padding:30px;
+    text-align:center;
+
+    border:1px solid #00ff41;
+    border-radius:12px;
+
+    transition:.3s;
+    cursor:pointer;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 0 20px rgba(0,255,65,.5);
+}
+
+.card h3{
+    margin-bottom:10px;
+    font-family:'Orbitron', sans-serif;
+}
+    
+    .card a,
+.card a:link,
+.card a:visited,
+.card a:hover,
+.card a:active{
+    color:#00ff41;
+    text-decoration:none;
+}
+    .card a h3{
+    color:#00ff41;
+}
+
+/* =========================
+   PRICING
+========================= */
+
+.plan-container{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:25px;
+
+    max-width:1100px;
+    margin:auto;
+}
+
+.plan{
+    text-align:center;
+    padding:30px;
+
+    border:1px solid #00ff41;
+    border-radius:12px;
+
+    transition:.3s;
+}
+
+.plan:hover{
+    transform:scale(1.03);
+    box-shadow:0 0 20px rgba(0,255,65,.4);
+}
+
+.plan h3{
+    font-family:'Orbitron', sans-serif;
+    margin-bottom:15px;
+}
+
+.plan p{
+    font-size:2rem;
+    margin-bottom:15px;
+}
+
+.plan ul{
+    list-style:none;
+}
+
+.plan li{
+    margin:10px 0;
+}
+
+.featured{
+    box-shadow:0 0 20px rgba(0,255,65,.6);
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    text-align:center;
+    padding:40px 20px;
+    border-top:1px solid #00ff41;
+}
+
+footer h3{
+    font-family:'Orbitron', sans-serif;
+}
+
+.footer-links{
+    margin:20px 0;
+}
+
+.footer-links a{
+    color:#00ff41;
+    text-decoration:none;
+    margin:0 10px;
+}
+
+.footer-links a:hover{
+    color:white;
+}
+
+.copyright{
+    color:#8aff9c;
+    font-size:.9rem;
+}
+
+/* =========================
+   SCROLLBAR
+========================= */
+
+::-webkit-scrollbar{
+    width:8px;
+}
+
+::-webkit-scrollbar-track{
+    background:#000;
+}
+
+::-webkit-scrollbar-thumb{
+    background:#00ff41;
+    border-radius:10px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:768px){
+
+    .logo{
+        font-size:2.2rem;
+    }
+
+    .navbar{
+        gap:12px;
+    }
+
+    section{
+        padding:40px 15px;
+    }
+
+    .plan p{
+        font-size:1.6rem;
+    }
+}
+    .uploaded-codes{
+    padding:60px 20px;
+}
+
+#codeContainer{
+    max-width:1100px;
+    margin:auto;
+    display:grid;
+    gap:20px;
+}
+
+.code-card{
+    border:1px solid #00ff41;
+    padding:20px;
+    border-radius:10px;
+}
+
+.code-card h3{
+    margin-bottom:10px;
+}
+
+.code-card pre{
+    overflow:auto;
+    margin-top:10px;
+    white-space:pre-wrap;
+}
+
+.copy-btn{
+    margin-top:10px;
+    padding:10px 15px;
+    cursor:pointer;
+    background:#00ff41;
+    border:none;
+    font-weight:bold;
+}
+    .card{
+    text-decoration:none;
+    color:#00ff41;
+}
+    .buy-btn{
+display:inline-block;
+padding:10px 20px;
+background:#00ff41;
+color:#000 !important;
+text-decoration:none;
+border-radius:5px;
+font-weight:bold;
+}
+
+.buy-btn:visited{
+color:#000 !important;
+}
+
+.buy-btn:hover{
+color:#000 !important;
+}
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <h1 class="logo">CODEBEG</h1>
+        <p class="tagline">Code • Learn • Build</p>
+    </header>
+
+    <!-- Category Navbar -->
+    <nav class="navbar">
+        <a href="#">Home</a>
+        <a href="#html">HTML</a>
+        <a href="#css">CSS</a>
+        <a href="#c">C</a>
+        <a href="#python">Python</a>
+        <a href="admin.html">Admin</a>
+        
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h2>Welcome to CodeBeg</h2>
+        <p>
+            A hacker-style code vault where you can store,
+            explore and reuse your favorite HTML, CSS,
+            C and Python snippets.
+        </p>
+    </section>
+
+    <!-- About Me -->
+    <section class="about">
+        <h2>About Me</h2>
+
+        <p>
+            Hi! I'm a student and developer who loves
+            learning programming and creating useful projects.
+            CodeBeg is my personal collection of reusable code snippets.
+        </p>
+    </section>
+
+    <!-- About Website -->
+    <section class="about">
+        <h2>About CodeBeg</h2>
+
+        <p>
+            CodeBeg helps organize HTML, CSS, C and Python
+            snippets in one place. Search, copy and reuse
+            code whenever you need it.
+        </p>
+    </section>
+
+    <!-- New Codes Slider -->
+    <section class="slider-section">
+
+        <h2>New Uploads</h2>
+
+        <div class="slider">
+
+            <div class="slide active">
+                <h3>Responsive Navbar</h3>
+                <p>HTML Component</p>
+            </div>
+
+            <div class="slide">
+                <h3>Glass Button</h3>
+                <p>CSS Effect</p>
+            </div>
+
+            <div class="slide">
+                <h3>factorial()</h3>
+                <p>C Function</p>
+            </div>
+
+            <div class="slide">
+                <h3>prime_check()</h3>
+                <p>Python Script</p>
+            </div>
+
+        </div>
+
+    </section>
+    <section class="uploaded-codes">
+
+    <h2>Uploaded Codes</h2>
+
+    <div id="codeContainer"></div>
+
+</section>
+
+    <!-- Category Cards -->
+    <section class="categories">
+
+        <h2>Categories</h2>
+
+        <div class="card-container">
+
+            <div class="card" id="html">
+                <a href="html.html">
+                <h3>HTML</h3>
+                <p>Components & Layouts</p></a>
+            </div>
+
+            <div class="card" id="css">
+                <a href="css.html">
+                <h3>CSS</h3>
+                <p>Design & Effects</p></a>
+            </div>
+
+            <div class="card" id="c">
+                <a href="c.html">
+                <h3>C</h3>
+                <p>Functions & Programs</p></a>
+            </div>
+
+            <div class="card" id="python">
+                <a href="python.html">
+                <h3>Python</h3>
+                <p>Scripts & Automation</p>
+                </a>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Pricing Plans -->
+    <section class="pricing">
+
+        <h2>Plans</h2>
+
+        <div class="plan-container">
+
+            <div class="plan">
+                <a href="payment.html" class="buy-btn">
+                <h3>FREE</h3>
+                <p>₹0</p>
+                <ul>
+                    <li>Basic snippets</li>
+                    <li>Limited access</li>
+                    <li>Community updates</li>
+                </ul>
+                </a>
+            </div>
+
+            <div class="plan featured">
+                 <a href="payment.html" class="buy-btn">
+                <h3>PRO</h3>
+                <p>₹49</p>
+                <ul>
+                    <li>All snippets</li>
+                    <li>Premium content</li>
+                    <li>Future updates</li>
+                </ul></a>
+            </div>
+
+            <div class="plan">
+                 <a href="payment.html" class="buy-btn">
+                <h3>LIFETIME</h3>
+                <p>₹99</p>
+                <ul>
+                    <li>Everything unlocked</li>
+                    <li>Lifetime access</li>
+                    <li>All future content</li>
+                </ul></a>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Footer -->
+    <footer>
+
+        <h3>CODEBEG</h3>
+
+        <p>Code • Learn • Build</p>
+
+        <div class="footer-links">
+            <a href="#">Home</a>
+            <a href="#html">HTML</a>
+            <a href="#css">CSS</a>
+            <a href="#c">C</a>
+            <a href="#python">Python</a>
+        </div>
+
+        <p class="copyright">
+            © 2026 CodeBeg. All Rights Reserved.
+        </p>
+
+    </footer>
+
+   
+<script>
+/* =========================
+   CODEBEG SCRIPT
+========================= */
+
+/* -------------------------
+   AUTO SLIDER
+------------------------- */
+
+const slides = document.querySelectorAll(".slide");
+
+let currentSlide = 0;
+
+function showSlide(index) {
+
+    slides.forEach(slide => {
+        slide.classList.remove("active");
+    });
+
+    slides[index].classList.add("active");
+}
+
+function nextSlide() {
+
+    currentSlide++;
+
+    if(currentSlide >= slides.length){
+        currentSlide = 0;
+    }
+
+    showSlide(currentSlide);
+}
+
+/* First Slide */
+showSlide(currentSlide);
+
+/* Change Every 3 Seconds */
+setInterval(nextSlide, 3000);
+
+
+/* -------------------------
+   CARD CLICK EFFECT
+------------------------- */
+
+const cards = document.querySelectorAll(".card");
+
+cards.forEach(card => {
+
+    card.addEventListener("click", () => {
+
+        card.style.transform = "scale(0.95)";
+
+        setTimeout(() => {
+            card.style.transform = "";
+        }, 150);
+
+    });
+
+});
+
+
+/* -------------------------
+   PLAN HOVER GLOW
+------------------------- */
+
+const plans = document.querySelectorAll(".plan");
+
+plans.forEach(plan => {
+
+    plan.addEventListener("mouseenter", () => {
+        plan.style.boxShadow = "0 0 25px rgba(0,255,65,0.7)";
+    });
+
+    plan.addEventListener("mouseleave", () => {
+        plan.style.boxShadow = "";
+    });
+
+});
+
+
+/* -------------------------
+   SMOOTH NAVIGATION
+------------------------- */
+
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+
+    anchor.addEventListener("click", function(e){
+
+        e.preventDefault();
+
+        const target = document.querySelector(
+            this.getAttribute("href")
+        );
+
+        if(target){
+
+            target.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+
+        }
+
+    });
+
+});
+
+
+/* -------------------------
+   TERMINAL WELCOME
+------------------------- */
+
+window.addEventListener("load", () => {
+
+    console.log(`
+================================
+        CODEBEG v1.0
+================================
+System Online...
+Code Vault Loaded...
+Access Granted...
+================================
+    `);
+
+});
+
+
+/* -------------------------
+   FUTURE FEATURES
+-------------------------
+
+1. Search System
+2. Category Filter
+3. Favorite Codes
+4. Copy Button
+5. JSON Code Database
+6. User Login
+7. Dark/Light Toggle
+
+------------------------- */
+const container =
+document.getElementById("codeContainer");
+
+if(container){
+
+    const codes =
+    JSON.parse(
+        localStorage.getItem("codes")
+    ) || [];
+
+    codes.forEach(item => {
+
+        const card =
+        document.createElement("div");
+
+        card.className = "code-card";
+
+        card.innerHTML = `
+            <h3>${item.title}</h3>
+
+            <p>
+                ${item.language}
+            </p>
+
+            <p>
+                ${item.description}
+            </p>
+
+            <pre>${item.code}</pre>
+
+            <button
+            class="copy-btn">
+            Copy Code
+            </button>
+        `;
+
+        const btn =
+        card.querySelector(".copy-btn");
+
+        btn.addEventListener(
+            "click",
+            () => {
+
+                navigator.clipboard
+                .writeText(item.code);
+
+                btn.textContent =
+                "Copied!";
+
+                setTimeout(() => {
+                    btn.textContent =
+                    "Copy Code";
+                },1500);
+
+            });
+
+        container.appendChild(card);
+
+    });
+
+}
+</script>
+</body>
+</html>
